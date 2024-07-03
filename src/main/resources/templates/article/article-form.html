@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Add/Edit Article</title>
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <h1 th:text="${article.id == null} ? 'Thêm Bài Viết' : 'Chỉnh Sửa Bài Viết'">Thêm/Sửa</h1>
+    <form th:action="@{${(article.id!= null)? '/articles/edit/' + article.id : '/articles/add'}}" th:object="${article}" method="post">
+    <div class="mb-3">
+            <label for="title" class="form-label">Tiêu Đề:</label>
+            <input type="text" th:field="*{title}" class="form-control" id="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="summary" class="form-label">Trích Dẫn:</label>
+            <input type="text" th:field="*{summary}" class="form-control" id="summary" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Nội Dung:</label>
+            <textarea th:field="*{content}" class="form-control" id="content" rows="10" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+        <a th:href="@{/articles}" class="btn btn-secondary">Hủy</a>
+    </form>
+</section>
+</body>
+</html>
